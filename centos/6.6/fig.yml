@@ -1,0 +1,9 @@
+#
+ldap:
+  build: .
+  hostname: ldap.dockerdomain
+  command: supervisord
+  ports:
+    - ":9001"
+    - ":389"
+    - ":9830"
