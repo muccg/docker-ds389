@@ -11,7 +11,7 @@ RUN yum install -y --disablerepo=ius \
 
 RUN pip2.7 install supervisor
 
-COPY supervisord.conf /etc/supervisor/supervisord.conf
+COPY supervisord.conf /etc/supervisord.conf
 COPY supervisord/supervisord-ds389.conf /etc/supervisord.d/supervisord-ds389.conf
 
 EXPOSE 9001 389 9830
