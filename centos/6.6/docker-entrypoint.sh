@@ -20,6 +20,13 @@ function defaults {
     export SERVER_IDENTIFIER ADMIN_DOMAIN
 }
 
+function bootstrap_etc() {
+    if [ ! -d /etc/dirsrv/schema/ ]; then
+        echo "Volume detected on /etc/dirsrv: copying back skeleton"
+        rsync -av /etc/dirsrv-skel/ /etc/dirsrv/
+    fi
+}
+
 
 function create_config() {
     echo "Creating config"
@@ -92,6 +99,7 @@ function setup {
 
 function firstrun {
     if ! [[ -f ${DOCKER_FIRSTRUN} ]]; then
+        bootstrap_etc
         create_config
         setup
         touch ${DOCKER_FIRSTRUN}
@@ -103,6 +111,7 @@ echo "HOME is ${HOME}"
 echo "WHOAMI is `whoami`"
 
 defaults
+
 firstrun
 
 if [ "$1" = 'supervisord' ]; then

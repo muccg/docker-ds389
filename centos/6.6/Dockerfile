@@ -6,6 +6,7 @@ ENV HOME /root
 RUN yum install -y --disablerepo=ius \
     389-ds \
     httpd \
+    rsync \
     && yum clean all
 
 RUN pip2.7 install supervisor
@@ -17,6 +18,7 @@ EXPOSE 9001 389 9830
 
 ADD ./docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
+RUN cp -r /etc/dirsrv /etc/dirsrv-skel
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD "supervisord"
