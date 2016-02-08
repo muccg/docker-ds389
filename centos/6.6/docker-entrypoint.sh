@@ -116,7 +116,7 @@ firstrun
 
 if [ "$1" = 'supervisord' ]; then
     echo "[Run] supervisord"
-    /usr/bin/supervisord -c /etc/supervisor/supervisord.conf -n
+    /usr/bin/supervisord -c /etc/supervisord.conf -n
     exit 0
 fi
 
